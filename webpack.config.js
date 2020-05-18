@@ -27,15 +27,33 @@ module.exports = {
 					loader: "babel-loader" // transpiling our JavaScript files using Babel and webpack
 				}
 			},
-			// {
-			// 	test: /\.(sa|sc|c)ss$/,
-			// 	use: [
-			// 		"style-loader", // creates style nodes from JS strings
-			// 		"css-loader", // translates CSS into CommonJS
-			// 		// "postcss-loader", // Loader for webpack to process CSS with PostCSS
-			// 		"sass-loader" // compiles Sass to CSS, using Node Sass by default
-			// 	]
-			// },
+			{
+				test: /\.less$/,
+				use: [
+					{
+						"loader": MiniCssExtractPlugin.loader
+					},
+					{
+						"loader": "css-loader",
+						options: {
+							"sourceMap": true
+						}
+					},
+					{
+						loader: "resolve-url-loader",
+						options: {
+							engine: "postcss",
+							sourceMap: true
+						}
+					},
+					{
+						loader: "less-loader",
+						options: {
+							sourceMap: true
+						}
+					}
+				]
+			},
 			{
 				test: /\.scss$/,
 				use: [

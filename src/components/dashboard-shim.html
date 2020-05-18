@@ -1,0 +1,24 @@
+<div class="DebugSplit">
+  <div class="DebugSplit-controlPanel">
+    <h2>Form options</h2>
+    <label
+      ><input type="checkbox" ng-model="$ctrl.something" />Current User is
+      Certified</label
+    >
+    <div>
+      <select
+        ng-model="$ctrl.somethingElse"
+        ng-options="roleSet.name for roleSet in $ctrl.roleSets"
+      ></select>
+    </div>
+  </div>
+  <div class="DebugSplit-mainPanel">
+    <div class="Dashboard-body">
+      <div class="Dashboard-columns">
+        <div class="Dashboard-column Dashboard-column--main" ng-transclude>
+          hello
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

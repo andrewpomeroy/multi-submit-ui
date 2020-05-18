@@ -5,11 +5,9 @@
     <base href="/" />
   </head>
 
-  <body ng-app="app">
-    <div ng-controller="HelloController">
-      I am: <strong>{{person}}</strong>
-      <test-component prop="person"></test-component>
-      <div ui-view></div>
+  <body ng-app="app" class="FlexView">
+    <div ng-controller="HelloController" class="FlexView">
+      <div ui-view class="FlexView"></div>
     </div>
     <script src="src/index.js"></script>
   </body>

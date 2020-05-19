@@ -13,10 +13,14 @@
     </div>
   </div>
   <div class="DebugSplit-mainPanel">
-    <div class="Dashboard-body">
-      <div class="Dashboard-columns">
-        <div class="Dashboard-column Dashboard-column--main" ng-transclude>
-          hello
+    <div class="Dashboard">
+      <div class="Dashboard-body">
+        <div class="Dashboard-columns">
+          <div class="Dashboard-column Dashboard-column--main">
+            <dashboard-signature-requests
+              forms="$ctrl.forms"
+            ></dashboard-signature-requests>
+          </div>
         </div>
       </div>
     </div>

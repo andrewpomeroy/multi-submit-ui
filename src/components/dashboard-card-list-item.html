@@ -1,0 +1,16 @@
+<div
+  class="JoinedCard"
+  ng-class="{'JoinedCard--first': $ctrl.isFirst, 'JoinedCard--last': $ctrl.isLast, 'JoinedCard--selected': $ctrl.isSelected}"
+>
+  <input
+    type="checkbox"
+    class="JoinedCard-checkbox JoinedCard-element"
+    ng-disabled="false"
+    ng-model="$ctrl.isSelected"
+  />
+  <!-- ng-disabled="!$ctrl.item.isSelectable" -->
+  <div class="JoinedCard-datum" ng-repeat="datum in $ctrl.item.displayFields">
+    <div class="JoinedCard-datum-label" ng-bind="datum.label"></div>
+    <div class="JoinedCard-datum-value" ng-bind="datum.value"></div>
+  </div>
+</div>

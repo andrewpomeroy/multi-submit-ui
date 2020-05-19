@@ -1,0 +1,28 @@
+@JoinedCard-paddingH: 12px;
+@JoinedCard-paddingV: 8px;
+@JoinedCard-innerPaddingH: 12px;
+
+.JoinedCard {
+  display: flex;
+  align-items: center;
+  padding: @JoinedCard-paddingV @JoinedCard-paddingH;
+  border: 1px solid gainsboro;
+  background: white;
+  &:not(.JoinedCard--first) {
+    margin-top: -1px;
+  }
+}
+.JoinedCard--first {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.JoinedCard--last {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.JoinedCard-element {
+  &:not(:last-child) {
+    margin-right: @JoinedCard-innerPaddingH;
+  }
+}

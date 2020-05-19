@@ -1,0 +1,17 @@
+<div class="Dashboard-collapseHeader">
+  <div class="Dashboard-collapseHeader-arrow Dashboard-collapseHeader-item">
+    <button
+      aria-label="{{$ctrl.isExpanded ? 'Collapse' : 'Expand'}}"
+      ng-class="{'expanded': $ctrl.isExpanded}"
+      class="btn btn-icon-solo"
+    >
+      <span
+        class="icon-wrap expand-toggle"
+        ng-class="{'expanded': group.expanded}"
+      >
+        <i class="app-icon-expand"></i>
+      </span>
+    </button>
+  </div>
+  <div class="Dashboard-collapseHeader-contents" ng-transclude></div>
+</div>

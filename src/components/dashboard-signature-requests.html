@@ -1,0 +1,30 @@
+<!-- <dashboard-section name="DMRs">
+  some stuff
+</dashboard-section> -->
+<dashboard-collapse-card-list
+  list="$ctrl.sections.dmr"
+  ng-if="$ctrl.sections.dmr"
+>
+  <!-- <dashboard-collapse-header is-collapsed="$ctrl.sections.dmr.isCollapsed" toggle="$ctrl.toggleSection('dmr')"> -->
+  <dashboard-collapse-header>
+    <div class="Dashboard-collapseHeader-item Dashboard-collapse-heading">
+      DMRs
+    </div>
+    <button
+      class="Dashboard-collapseHeader-item btn btn-default"
+      ng-click="$ctrl.selectAll('dmr')"
+    >
+      Select All
+    </button>
+  </dashboard-collapse-header>
+  <dashboard-collapse-list-contents>
+    <dashboard-card-list
+      list="$ctrl.sections.dmr.items"
+      list-name="dmr"
+      select-context="$ctrl"
+    >
+      <!-- <dashboard-card-list-item></dashboard-card-list-item> -->
+    </dashboard-card-list>
+  </dashboard-collapse-list-contents>
+</dashboard-collapse-card-list>
+<pre>{{$ctrl.selectedIds | json}}</pre>

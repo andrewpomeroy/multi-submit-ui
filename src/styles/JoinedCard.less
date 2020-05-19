@@ -2,9 +2,11 @@
 @JoinedCard-paddingV: 8px;
 @JoinedCard-innerPaddingH: 12px;
 
-.JoinedCard {
+.JoinedCard, .JoinedCard-split {
   display: flex;
   align-items: center;
+}
+.JoinedCard {
   padding: @JoinedCard-paddingV @JoinedCard-paddingH;
   border: 1px solid gainsboro;
   background: white;
@@ -25,4 +27,20 @@
   &:not(:last-child) {
     margin-right: @JoinedCard-innerPaddingH;
   }
+}
+
+.JoinedCard-checkbox {
+  // height: 24px;
+  // width: 24px;
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.JoinedCard-datum-label {
+  color: gray;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-size: 13px;
 }

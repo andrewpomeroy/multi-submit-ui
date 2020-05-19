@@ -2,15 +2,27 @@
   class="JoinedCard"
   ng-class="{'JoinedCard--first': $ctrl.isFirst, 'JoinedCard--last': $ctrl.isLast, 'JoinedCard--selected': $ctrl.isSelected}"
 >
-  <input
-    type="checkbox"
-    class="JoinedCard-checkbox JoinedCard-element"
-    ng-disabled="false"
-    ng-model="$ctrl.isSelected"
-  />
-  <!-- ng-disabled="!$ctrl.item.isSelectable" -->
-  <div class="JoinedCard-datum" ng-repeat="datum in $ctrl.item.displayFields">
-    <div class="JoinedCard-datum-label" ng-bind="datum.label"></div>
-    <div class="JoinedCard-datum-value" ng-bind="datum.value"></div>
+  <div class="JoinedCard-element JoinedCard-split" flex="fill">
+    <input
+      type="checkbox"
+      class="JoinedCard-checkbox JoinedCard-element"
+      ng-disabled="false"
+      ng-model="$ctrl.isSelected"
+    />
+    <!-- ng-disabled="!$ctrl.item.isSelectable" -->
+    <div
+      class="JoinedCard-datum JoinedCard-element"
+      ng-repeat="datum in $ctrl.item.displayFields"
+    >
+      <div class="JoinedCard-datum-label" ng-bind="datum.label"></div>
+      <div class="JoinedCard-datum-value" ng-bind="datum.value"></div>
+    </div>
+  </div>
+  <div class="JoinedCard-element" ng-if="$ctrl.item.requiredSignatures > 1">
+    {{$ctrl.item.signatures.length}} of {{$ctrl.item.requiredSignatures}}
+    signatures
+  </div>
+  <div class="JoinedCard-element">
+    <button class="btn btn-default">Preview</button>
   </div>
 </div>

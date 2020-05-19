@@ -19,6 +19,9 @@ function controller () {
 		var siteName = faker.company.companyName();
 		var	startDate = faker.date.past();
 		var endDate = faker.date.recent();
+		var requiredSignatures = Math.floor(Math.random() * 5 + 1);
+		var signatures = Math.floor(Math.random() * (requiredSignatures - 1));
+		signatures = signatures < 0 ? 0 : signatures;
 		return {
 			id: uuid(),
 			siteName,
@@ -29,7 +32,14 @@ function controller () {
 					label: siteName,
 					value: dayjs(startDate).format("MM/DD/YYYY") + " — " + dayjs(endDate).format("MM/DD/YYYY"),
 				}
-			]
+			],
+			requiredSignatures,
+			signatures: [...Array(signatures).keys()].map(function () {
+				return {
+					name: faker.name.findName(),
+					date: faker.date.recent()
+				};
+			})
 		};
 	}
 

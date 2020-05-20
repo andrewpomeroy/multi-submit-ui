@@ -70,6 +70,25 @@ function controller () {
 		_toggleItem($ctrl.selectedIds, item.id);
 	};
 
+	$ctrl.areAllSelected = function (section) {
+		return section.items.every(function (item) {
+			return $ctrl.selectedIds.find(function (selectedId) {
+				console.log(selectedId, item.id);
+				return selectedId === item.id;
+			});
+		});
+	};
+	
+	$ctrl.selectAll = function (section) {
+		var deselecting = $ctrl.areAllSelected(section);
+		if (deselecting) {
+			$ctrl.selectedIds = [];
+		}
+		else {
+			$ctrl.selectedIds = section.items.map(function (item) { return item.id; });
+		}
+	};
+
 	$ctrl.toggleGroup = function (name) {
 		var section = $ctrl.sections.find(function (section) {
 			return section.name === name;

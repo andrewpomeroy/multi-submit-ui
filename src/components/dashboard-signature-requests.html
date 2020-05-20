@@ -16,9 +16,9 @@
     </div>
     <button
       class="Dashboard-collapseHeader-item btn btn-default"
-      ng-click="$ctrl.selectAll(section.name)"
+      ng-click="$ctrl.selectAll(section)"
     >
-      Select All
+      {{$ctrl.areAllSelected(section) ? 'Deselect All' : 'Select All'}}
     </button>
   </dashboard-collapse-header>
   <dashboard-collapse-list-contents is-expanded="section.isExpanded">

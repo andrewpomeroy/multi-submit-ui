@@ -3,7 +3,8 @@ import template from "./dashboard-collapse-card-list.html";
 
 export default {
 	bindings: {
-		list: "<"
+		list: "<",
+		isExpanded: "<"
 	},
 	template: template,
 	transclude: true

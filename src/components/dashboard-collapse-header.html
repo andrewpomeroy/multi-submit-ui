@@ -2,12 +2,12 @@
   <div class="Dashboard-collapseHeader-arrow Dashboard-collapseHeader-item">
     <button
       aria-label="{{$ctrl.isExpanded ? 'Collapse' : 'Expand'}}"
-      ng-class="{'expanded': $ctrl.isExpanded}"
       class="btn btn-icon-solo"
+      ng-click="$ctrl.toggleGroup($event)"
     >
       <span
         class="icon-wrap expand-toggle"
-        ng-class="{'expanded': group.expanded}"
+        ng-class="{'expanded': $ctrl.isExpanded}"
       >
         <i class="app-icon-expand"></i>
       </span>

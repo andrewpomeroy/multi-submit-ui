@@ -45,9 +45,11 @@ function controller () {
 
 	var dmrRange = [...Array(5).keys()];
 	var dmrs = dmrRange.map(makeFakeDmr);
+	var otherForms = dmrRange.map(makeFakeDmr);
 
 	$ctrl.forms = {
-		dmr: dmrs
+		dmr: dmrs,
+		other: otherForms
 	};
 
 }

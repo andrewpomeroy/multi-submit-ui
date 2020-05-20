@@ -2,26 +2,31 @@
   some stuff
 </dashboard-section> -->
 <dashboard-collapse-card-list
-  list="$ctrl.sections.dmr"
-  ng-if="$ctrl.sections.dmr"
+  ng-repeat="section in $ctrl.sections"
+  is-expanded="section.isExpanded"
+  list="section"
 >
   <!-- <dashboard-collapse-header is-collapsed="$ctrl.sections.dmr.isCollapsed" toggle="$ctrl.toggleSection('dmr')"> -->
-  <dashboard-collapse-header>
+  <dashboard-collapse-header
+    is-expanded="section.isExpanded"
+    on-toggle="$ctrl.toggleGroup(section.name)"
+  >
     <div class="Dashboard-collapseHeader-item Dashboard-collapse-heading">
-      DMRs
+      {{section.displayName}}
     </div>
     <button
       class="Dashboard-collapseHeader-item btn btn-default"
-      ng-click="$ctrl.selectAll('dmr')"
+      ng-click="$ctrl.selectAll(section.name)"
     >
       Select All
     </button>
   </dashboard-collapse-header>
-  <dashboard-collapse-list-contents>
+  <dashboard-collapse-list-contents is-expanded="section.isExpanded">
     <dashboard-card-list
-      list="$ctrl.sections.dmr.items"
-      list-name="dmr"
+      list="section.items"
+      list-name="{{section.name}}"
       select-context="$ctrl"
+      is-selectable="$ctrl.isSelectable(section.name)"
     >
       <!-- <dashboard-card-list-item></dashboard-card-list-item> -->
     </dashboard-card-list>

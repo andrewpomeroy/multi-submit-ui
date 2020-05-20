@@ -3,3 +3,12 @@
   background: none;
   padding: 8px;
 }
+
+.icon-wrap.expand-toggle {
+  &.expanded {
+      transform: rotate(90deg);
+  }
+  transition: 220ms all ease;
+  transform-origin: 50% 40%;
+  transition-timing-function: cubic-bezier(0.055, 0.845, 0.475, 0.975);
+}

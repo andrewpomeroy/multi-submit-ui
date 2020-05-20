@@ -6,7 +6,7 @@
     <input
       type="checkbox"
       class="JoinedCard-checkbox JoinedCard-element"
-      ng-disabled="false"
+      ng-disabled="!$ctrl.isSelectable"
       ng-model="$ctrl.isSelected"
     />
     <!-- ng-disabled="!$ctrl.item.isSelectable" -->

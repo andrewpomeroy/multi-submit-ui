@@ -1,1 +1,5 @@
-<div class="Dashboard-collapse-card-list" ng-transclude></div>
+<div
+  class="Dashboard-collapse-card-list"
+  ng-class="{'Dashboard-collapse-card-list--isExpanded': $ctrl.isExpanded}"
+  ng-transclude
+></div>

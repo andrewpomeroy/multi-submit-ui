@@ -6,7 +6,8 @@ export default {
 		item: "<",
 		isFirst: "<",
 		isLast: "<",
-		selectContext: "<"
+		selectContext: "<",
+		isSelectable: "<"
 	},
 	require: {
 		dashboardCardList: "?^"
@@ -19,17 +20,13 @@ export default {
 function controller () {
 	var $ctrl = this;
 
-	$ctrl.$onInit = function () {
-		console.log($ctrl.selectContext);
-	};
-
 	Object.defineProperties($ctrl, {
 		isSelected: {
 			get: function () {
 				return $ctrl.selectContext.isSelected($ctrl.item);
 			},
 			set: function(value) {
-				$ctrl.selectContext.toggle($ctrl.item, value);
+				$ctrl.selectContext.toggleItem($ctrl.item, value);
 			}
 		}
 	});

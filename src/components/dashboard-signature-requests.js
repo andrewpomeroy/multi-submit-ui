@@ -14,22 +14,25 @@ export default {
 function controller () {
 	var $ctrl = this;
 
-	$ctrl.$onInit = function () {
-		$ctrl.sections = [
-			{
-				name: "dmr",
-				displayName: "DMRs",
-				isExpanded: true,
-				items: $ctrl.forms.dmr
-			},
-			{
-				name: "other",
-				displayName: "Other Form",
-				isExpanded: true,
-				items: $ctrl.forms.other
-			}
-		];
-	};
+	$ctrl.sections = [];
+
+	$ctrl.$onChanges = function (changes) {
+		if (changes.forms) {
+			console.log(changes.forms.currentValue);
+			// Really dumb manner of merging in new form items and retaining other properties
+			$ctrl.sections = changes.forms.currentValue.map(function (formType) {
+				var existingSection = ($ctrl.sections.find(function (section) {
+					return section.name === formType.name;
+				}));
+				return {
+					name: formType.name,
+					displayName: formType.displayName,
+					isExpanded: existingSection ? existingSection.isExpanded : true,
+					items: formType.items,
+				}
+			})
+		}
+	}
 
 	$ctrl.selectedIds = [];
 
@@ -71,7 +74,7 @@ function controller () {
 	};
 
 	$ctrl.areAllSelected = function (section) {
-		return section.items.every(function (item) {
+		return section.items && section.items.every(function (item) {
 			return $ctrl.selectedIds.find(function (selectedId) {
 				console.log(selectedId, item.id);
 				return selectedId === item.id;

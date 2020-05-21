@@ -1,0 +1,30 @@
+.Dashboard-splitY {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.Dashboard-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.Dashboard-actionBar {
+  flex: 0 0 auto;
+  padding: @Dashboard-marginV-small @Dashboard-marginH-base;   
+  background: @form-actions-bg;
+  border-top: @form-actions-border-width solid @validation-default;
+  &.ng-enter, &.ng-leave
+  {
+    transition: border-color, transform;
+    transition-duration: .5s, @page-body-height-transition-duration;
+  }
+  &.ng-enter.ng-enter-active, &.ng-leave
+  {
+    transform: translateY(0);
+  }
+  &.ng-leave.ng-leave-active, &.ng-enter
+  {
+    transform: translateY(100%);
+  }
+}

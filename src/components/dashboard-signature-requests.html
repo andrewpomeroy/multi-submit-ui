@@ -1,35 +1,50 @@
-<!-- <dashboard-section name="DMRs">
-  some stuff
-</dashboard-section> -->
-<dashboard-collapse-card-list
-  ng-repeat="section in $ctrl.sections"
-  is-expanded="section.isExpanded"
-  list="section"
->
-  <!-- <dashboard-collapse-header is-collapsed="$ctrl.sections.dmr.isCollapsed" toggle="$ctrl.toggleSection('dmr')"> -->
-  <dashboard-collapse-header
-    is-expanded="section.isExpanded"
-    on-toggle="$ctrl.toggleGroup(section.name)"
-  >
-    <div class="Dashboard-collapseHeader-item Dashboard-collapse-heading">
-      {{section.displayName}}
+<div class="Dashboard-body">
+  <div class="Dashboard-columns">
+    <div class="Dashboard-column Dashboard-column--main">
+      <!-- <dashboard-section name="DMRs">
+			some stuff
+		</dashboard-section> -->
+      <dashboard-collapse-card-list
+        ng-repeat="section in $ctrl.sections"
+        is-expanded="section.isExpanded"
+        list="section"
+      >
+        <!-- <dashboard-collapse-header is-collapsed="$ctrl.sections.dmr.isCollapsed" toggle="$ctrl.toggleSection('dmr')"> -->
+        <dashboard-collapse-header
+          is-expanded="section.isExpanded"
+          on-toggle="$ctrl.toggleGroup(section.name)"
+        >
+          <div class="Dashboard-collapseHeader-item Dashboard-collapse-heading">
+            {{section.displayName}}
+          </div>
+          <button
+            class="Dashboard-collapseHeader-item btn btn-default"
+            ng-click="$ctrl.selectAll(section)"
+          >
+            {{$ctrl.areAllSelected(section) ? 'Deselect All' : 'Select All'}}
+          </button>
+        </dashboard-collapse-header>
+        <dashboard-collapse-list-contents is-expanded="section.isExpanded">
+          <dashboard-card-list
+            list="section.items"
+            list-name="{{section.name}}"
+            select-context="$ctrl"
+            is-selectable="$ctrl.isSelectable(section.name)"
+          >
+            <!-- <dashboard-card-list-item></dashboard-card-list-item> -->
+          </dashboard-card-list>
+        </dashboard-collapse-list-contents>
+      </dashboard-collapse-card-list>
+      <pre>{{$ctrl.selectedIds | json}}</pre>
     </div>
-    <button
-      class="Dashboard-collapseHeader-item btn btn-default"
-      ng-click="$ctrl.selectAll(section)"
-    >
-      {{$ctrl.areAllSelected(section) ? 'Deselect All' : 'Select All'}}
+  </div>
+</div>
+<div class="Dashboard-actionBar" ng-if="$ctrl.selectedIds.length">
+  <!-- <div class="Dashboard-actionBar"> -->
+  <div class="Dashboard-action">
+    <button class="btn btn-save">
+      Sign {{$ctrl.selectedIds.length > 1 ? $ctrl.selectedIds.length + ' Forms'
+      : 'Form'}}
     </button>
-  </dashboard-collapse-header>
-  <dashboard-collapse-list-contents is-expanded="section.isExpanded">
-    <dashboard-card-list
-      list="section.items"
-      list-name="{{section.name}}"
-      select-context="$ctrl"
-      is-selectable="$ctrl.isSelectable(section.name)"
-    >
-      <!-- <dashboard-card-list-item></dashboard-card-list-item> -->
-    </dashboard-card-list>
-  </dashboard-collapse-list-contents>
-</dashboard-collapse-card-list>
-<pre>{{$ctrl.selectedIds | json}}</pre>
+  </div>
+</div>

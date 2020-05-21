@@ -1,4 +1,5 @@
 import angular from "angular";
+import "angular-animate";
 import "@uirouter/angularjs";
 
 import "./app";

@@ -18,7 +18,6 @@ function controller () {
 
 	$ctrl.$onChanges = function (changes) {
 		if (changes.forms) {
-			console.log(changes.forms.currentValue);
 			// Really dumb manner of merging in new form items and retaining other properties
 			$ctrl.sections = changes.forms.currentValue.map(function (formType) {
 				var existingSection = ($ctrl.sections.find(function (section) {
@@ -76,7 +75,6 @@ function controller () {
 	$ctrl.areAllSelected = function (section) {
 		return section.items && section.items.every(function (item) {
 			return $ctrl.selectedIds.find(function (selectedId) {
-				console.log(selectedId, item.id);
 				return selectedId === item.id;
 			});
 		});

@@ -85,15 +85,15 @@ function controller () {
 
 	$ctrl.forms = [
 		{
+			name: "other",
+			displayName: "Some Other Form",
+			items: otherForms
+		},
+		{
 			name: "dmr",
 			displayName: "DMRs",
 			items: dmrs
 		},
-		{
-			name: "other",
-			displayName: "Some Other Form",
-			items: otherForms
-		}
 	];
 
 }

@@ -1,16 +1,8 @@
 <div class="DebugSplit">
   <div class="DebugSplit-controlPanel">
-    <h2>Form options</h2>
-    <label
-      ><input type="checkbox" ng-model="$ctrl.something" />Current User is
-      Certified</label
-    >
-    <div>
-      <select
-        ng-model="$ctrl.somethingElse"
-        ng-options="roleSet.name for roleSet in $ctrl.roleSets"
-      ></select>
-    </div>
+    <h2>Debug</h2>
+    <h3>Forms</h3>
+    <pre>{{$ctrl.forms | json}}</pre>
   </div>
   <div class="DebugSplit-mainPanel">
     <div class="Dashboard" layout="vertical">

@@ -1,7 +1,7 @@
 import angular from "angular";
 import template from "./dashboard-collapse-header.html";
 
-export default {
+var component = {
 	bindings: {
 		onToggle: "&",
 		isExpanded: "<"
@@ -19,3 +19,5 @@ function controller ($scope) {
 		$ctrl.onToggle({});
 	};
 }
+
+angular.module("app").component('dashboardCollapseHeader', component)

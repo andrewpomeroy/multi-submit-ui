@@ -1,7 +1,7 @@
 import angular from "angular";
 import template from "./dashboard-collapse-card-list.html";
 
-export default {
+var component = {
 	bindings: {
 		list: "<",
 		isExpanded: "<"
@@ -9,3 +9,5 @@ export default {
 	template: template,
 	transclude: true
 };
+
+angular.module("app").component('dashboardCollapseCardList', component)

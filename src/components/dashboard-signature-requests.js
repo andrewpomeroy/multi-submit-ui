@@ -2,7 +2,7 @@ import angular from "angular";
 import _ from "lodash";
 import template from "./dashboard-signature-requests.html";
 
-export default {
+var component = {
 	bindings: {
 		forms: "<"
 	},
@@ -98,3 +98,5 @@ function controller () {
 	};
 
 }
+
+angular.module("app").component('dashboardSignatureRequests', component)

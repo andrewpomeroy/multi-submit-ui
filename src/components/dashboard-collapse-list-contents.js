@@ -1,7 +1,7 @@
 import angular from "angular";
 import template from "./dashboard-collapse-list-contents.html";
 
-export default {
+var component = {
 	bindings: {
 	},
 	require: {
@@ -22,3 +22,5 @@ function controller () {
 		}
 	});
 }
+
+angular.module("app").component('dashboardCollapseListContents', component)

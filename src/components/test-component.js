@@ -1,9 +1,11 @@
 import angular from "angular";
 import template from "./test-component.html";
 
-export default {
+var component = {
 	bindings: {
 		prop: "<",
 	},
 	template: template
 };
+
+angular.module("app").component('testComponent', component)

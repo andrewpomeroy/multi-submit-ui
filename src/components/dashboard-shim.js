@@ -4,7 +4,7 @@ import faker from "faker";
 import dayjs from "dayjs";
 import uuid from "uuid4";
 
-export default {
+var component = {
 	bindings: {
 	},
 	template: template,
@@ -97,3 +97,5 @@ function controller () {
 	];
 
 }
+
+angular.module("app").component('dashboardShim', component);

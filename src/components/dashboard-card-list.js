@@ -1,7 +1,7 @@
 import angular from "angular";
 import template from "./dashboard-card-list.html";
 
-export default {
+var component = {
 	bindings: {
 		list: "<",
 		listName: "@",
@@ -20,3 +20,5 @@ function controller () {
 	};
 	
 }
+
+angular.module("app").component('dashboardCardList', component)

@@ -1,7 +1,7 @@
 import angular from "angular";
 import template from "./dashboard-card-list-item.html";
 
-export default {
+var component = {
 	bindings: {
 		item: "<",
 		isFirst: "<",
@@ -32,3 +32,5 @@ function controller () {
 	});
 	
 }
+
+angular.module("app").component('dashboardCardListItem', component)

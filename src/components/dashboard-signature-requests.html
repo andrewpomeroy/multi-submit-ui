@@ -41,9 +41,13 @@
 <div class="Dashboard-actionBar" ng-if="$ctrl.selectedIds.length">
   <!-- <div class="Dashboard-actionBar"> -->
   <div class="Dashboard-action">
-    <button class="btn btn-save">
+    <button class="btn btn-save" ng-click="$ctrl.openSigningPrompt($event)">
       Sign {{$ctrl.selectedIds.length > 1 ? $ctrl.selectedIds.length + ' Forms'
       : 'Form'}}
     </button>
   </div>
 </div>
+<signature-roles-dialog
+  form-ids="$ctrl.idsToSign"
+  open-event="$ctrl.openSigningModalEvent"
+></signature-roles-dialog>

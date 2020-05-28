@@ -97,6 +97,12 @@ function controller () {
 		section.isExpanded = !section.isExpanded;
 	};
 
+	$ctrl.openSigningPrompt = function ($event) {
+		$ctrl.openSigningModalEvent = $event;
+		$ctrl.idsToSign = $ctrl.selectedIds;
+		console.log($ctrl.idsToSign);
+	}
+
 }
 
 angular.module("app").component('dashboardSignatureRequests', component)

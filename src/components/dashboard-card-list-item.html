@@ -2,14 +2,51 @@
   class="JoinedCard"
   ng-class="{'JoinedCard--first': $ctrl.isFirst, 'JoinedCard--last': $ctrl.isLast, 'JoinedCard--selected': $ctrl.isSelected}"
 >
-  <div class="JoinedCard-element JoinedCard-split" flex="fill">
+  <div class="Slab-splitH" flex="fill">
+    <div class="Slab-split-item Slab-split-item--fill">
+      <div class="Dashboard-item-row">
+        <div class="Dashboard-item-site">
+          <div class="Dashboard-item-contextTitle">
+            {{$ctrl.item.displayData.siteName}}
+          </div>
+        </div>
+      </div>
+      <div
+        class="Dashboard-item-row"
+        ng-if="$ctrl.item.displayData.preparedOnDisplay"
+      >
+        <span
+          >Prepared on
+          <strong>{{$ctrl.item.displayData.preparedOnDisplay}}</strong> by
+          <strong>{{$ctrl.item.displayData.preparedBy}}</strong></span
+        >
+      </div>
+      <div
+        class="Dashboard-item-row"
+        ng-if="$ctrl.item.displayData.dateRangeStr"
+      >
+        <strong ng-bind="$ctrl.item.displayData.dateRangeStr"></strong>
+      </div>
+      <div
+        class="Dashboard-item-row"
+        ng-if="$ctrl.item.displayData.submissionId"
+        style="font-family: monospace;"
+      >
+        <!-- Submission ID #&nbsp; -->
+        <strong>{{$ctrl.item.displayData.submissionId}}</strong>
+      </div>
+    </div>
+    <div class="Slab-split-item">
+      <button class="btn btn-default">Preview</button>
+    </div>
+  </div>
+  <!-- <div class="JoinedCard-element JoinedCard-split" flex="fill">
     <input
       type="checkbox"
       class="JoinedCard-checkbox JoinedCard-element"
       ng-disabled="!$ctrl.isSelectable"
       ng-model="$ctrl.isSelected"
     />
-    <!-- ng-disabled="!$ctrl.item.isSelectable" -->
     <div
       class="JoinedCard-datum JoinedCard-element"
       ng-repeat="datum in $ctrl.item.displayFields"
@@ -24,5 +61,5 @@
   </div>
   <div class="JoinedCard-element">
     <button class="btn btn-default">Preview</button>
-  </div>
+  </div> -->
 </div>

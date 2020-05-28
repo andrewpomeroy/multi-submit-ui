@@ -44,38 +44,46 @@ function controller () {
 			submissionId,
 			preparedDate,
 			preparedBy,
-			displayFields: [
-				{
-					label: "Submission ID",
-					value: submissionId
-				},
-				{
-					label: "Prepared On",
-					value: dayjs(preparedDate).format("MM/DD/YYYY")
-				},
-				{
-					label: "Prepared By",
-					value: preparedBy
-				},
-			]
+			// displayFields: [
+			// 	{
+			// 		label: "Submission ID",
+			// 		value: submissionId
+			// 	},
+			// 	{
+			// 		label: "Prepared On",
+			// 		value: dayjs(preparedDate).format("MM/DD/YYYY")
+			// 	},
+			// 	{
+			// 		label: "Prepared By",
+			// 		value: preparedBy
+			// 	},
+			// ]
+			displayData: {
+				submissionId,
+				preparedOnDisplay: dayjs(preparedDate).format("MM/DD/YYYY"),
+				preparedBy,
+				siteName: faker.company.companyName()
+			}
 		}
 	}
 
 	function makeFakeDmr() {
-		var siteName = faker.company.companyName();
 		var	startDate = faker.date.past();
 		var endDate = faker.date.recent();
 		return {
 			...makeFakeGenericForm(),
-			siteName,
 			startDate,
 			endDate,
-			displayFields: [
-				{
-					label: siteName,
-					value: dayjs(startDate).format("MM/DD/YYYY") + " — " + dayjs(endDate).format("MM/DD/YYYY"),
-				}
-			],
+			displayData: {
+				siteName: faker.company.companyName(),
+				dateRangeStr: dayjs(startDate).format("MM/DD/YYYY") + " — " + dayjs(endDate).format("MM/DD/YYYY"),
+			}
+			// displayFields: [
+			// 	{
+			// 		label: siteName,
+			// 		value: dayjs(startDate).format("MM/DD/YYYY") + " — " + dayjs(endDate).format("MM/DD/YYYY"),
+			// 	}
+			// ],
 		};
 	}
 

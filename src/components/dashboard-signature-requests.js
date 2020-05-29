@@ -14,6 +14,19 @@ var component = {
 function controller () {
 	var $ctrl = this;
 
+	Object.defineProperties($ctrl, {
+		allForms: {
+			get: function () {
+				return $ctrl.forms.reduce(function (output, formGroup) {
+					formGroup.items.forEach(function (item) {
+						output.push(item);
+					})
+					return output;
+				}, [])
+			}
+		}
+	})
+
 	$ctrl.sections = [];
 
 	$ctrl.$onChanges = function (changes) {
@@ -98,9 +111,14 @@ function controller () {
 	};
 
 	$ctrl.openSigningPrompt = function ($event) {
-		$ctrl.openSigningModalEvent = $event;
-		$ctrl.idsToSign = $ctrl.selectedIds;
-		console.log($ctrl.idsToSign);
+		$ctrl.openSigningDialogEvent = $event;
+		$ctrl.formsToSign = $ctrl.allForms.filter(function (form) {
+			return $ctrl.selectedIds.find(function (id) { return id === form.id });
+		})
+	}
+
+	$ctrl.onSigningDialogClose = function () {
+		$ctrl.formsToSign = [];
 	}
 
 }

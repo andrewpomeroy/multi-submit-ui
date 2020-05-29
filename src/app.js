@@ -1,4 +1,4 @@
-angular.module("app", ["ui.router", 'ngAnimate']).controller("HelloController", function ($scope) {
+angular.module("app", ["ui.router", 'ngAnimate', 'ngMaterial']).controller("HelloController", function ($scope) {
 	$scope.person = "andrew";
 });
 

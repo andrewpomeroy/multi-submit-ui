@@ -47,7 +47,8 @@
     </button>
   </div>
 </div>
-<signature-roles-dialog
-  form-ids="$ctrl.idsToSign"
-  open-event="$ctrl.openSigningModalEvent"
-></signature-roles-dialog>
+<signing-roles-dialog
+  forms="$ctrl.formsToSign"
+  open-event="$ctrl.openSigningDialogEvent"
+  on-close="$ctrl.onSigningDialogClose"
+></signing-roles-dialog>

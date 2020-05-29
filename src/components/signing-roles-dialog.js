@@ -4,19 +4,21 @@ import template from "./signing-roles-dialog.html";
 var signingRolesDialog = {
 	bindings: {
 		openEvent: "<",
-		formIds: "<",
+		forms: "<",
+		onClose: "<",
 	},
-	template: template,
-	controller: controller
+	controller: signingRolesDialogCtrl
 };
 
-controller.$inject = ["$mdDialog"]
-function controller($mdDialog) {
+signingRolesDialogCtrl.$inject = ["$mdDialog"]
+function signingRolesDialogCtrl($mdDialog) {
 	var $ctrl = this;
 
-	$ctrl.$onChanges = changes => {
+	console.log($ctrl.forms);
+
+	$ctrl.$onChanges = function (changes) {
 		console.log(changes);
-		if (changes.formIds && changes.formIds.currentValue && changes.formIds.currentValue.length) {
+		if (changes.forms && changes.forms.currentValue && changes.forms.currentValue.length) {
 			// Initialize dialog
 
 			$mdDialog
@@ -27,25 +29,25 @@ function controller($mdDialog) {
 					controller: [
 						"$scope",
 						"$mdDialog",
-						"formIds",
-						function reassignDialogCtrl($scope, $mdDialog, formIds) {
+						"forms",
+						function reassignDialogCtrl($scope, $mdDialog, forms) {
 							if (!$ctrl.openEvent) {
 								console.warn("No `open-event` specified for modalSelectMenu. This is necessary for accessibility.", $element);
 							}
 							if ($ctrl.openEvent && !$ctrl.openEvent.target) {
 								console.warn("Invalid `open-event` specified for modalSelectMenu. This is necessary for accessibility.", $element);
 							}
-							$scope.formIds = formIds;
+							$scope.forms = forms;
 
 							$scope.close = () => $mdDialog.hide();
 						},
 					],
 					template: template,
 					locals: {
-						formIds: $ctrl.formIds
+						forms: $ctrl.forms
 					},
 					onRemoving: () => {
-						// $ctrl.onSelect($ctrl._selectedItem);
+						$ctrl.onClose();
 					},
 				})
 				.finally(() => { });
@@ -54,4 +56,6 @@ function controller($mdDialog) {
 
 }
 
-angular.module("app").component('signingRolesDialog', signingRolesDialog);
+console.log(signingRolesDialog);
+
+console.log(angular.module("app").component('signingRolesDialog', signingRolesDialog))

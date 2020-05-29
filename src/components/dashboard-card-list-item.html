@@ -3,6 +3,14 @@
   ng-class="{'JoinedCard--first': $ctrl.isFirst, 'JoinedCard--last': $ctrl.isLast, 'JoinedCard--selected': $ctrl.isSelected}"
 >
   <div class="Slab-splitH" flex="fill">
+    <div class="Slab-split-item">
+      <input
+        type="checkbox"
+        class="JoinedCard-checkbox JoinedCard-element"
+        ng-disabled="!$ctrl.isSelectable"
+        ng-model="$ctrl.isSelected"
+      />
+    </div>
     <div class="Slab-split-item Slab-split-item--fill">
       <div class="Dashboard-item-row">
         <div class="Dashboard-item-site">

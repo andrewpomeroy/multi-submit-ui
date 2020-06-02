@@ -5,6 +5,9 @@
 @validation-default: #d6d6d6;
 @page-body-height-transition-duration: .4s;
 
+@thead-border-color: #dedede;
+
+
 .btn.btn-icon-solo {
   border: 0;
   background: none;
@@ -18,4 +21,14 @@
   transition: 220ms all ease;
   transform-origin: 50% 40%;
   transition-timing-function: cubic-bezier(0.055, 0.845, 0.475, 0.975);
+}
+
+.table {
+  font-size: 1rem;
+}
+
+.table > thead > tr {
+  th, .th {
+    line-height: 1.2;
+  }
 }

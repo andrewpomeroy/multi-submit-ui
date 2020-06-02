@@ -24,20 +24,45 @@ function signingRolesDialogCtrl($mdDialog) {
 					targetEvent: $ctrl.openEvent,
 					closeTo: $ctrl.openEvent ? $ctrl.openEvent.target : undefined,
 					clickOutsideToClose: true,
+					bindToController: true,
+					controllerAs: "$ctrl",
 					controller: [
 						"$scope",
 						"$mdDialog",
+						"$element",
 						"toSign",
-						function reassignDialogCtrl($scope, $mdDialog, toSign) {
+						function signingRolesDialogCtrlInner($scope, $mdDialog, $element, toSign) {
+							var $ctrl = this;
+
+							
 							if (!$ctrl.openEvent) {
-								console.warn("No `open-event` specified for modalSelectMenu. This is necessary for accessibility.", $element);
+								console.warn("No `open-event` specified for signingRolesDialog. This is necessary for accessibility.", $element);
 							}
 							if ($ctrl.openEvent && !$ctrl.openEvent.target) {
-								console.warn("Invalid `open-event` specified for modalSelectMenu. This is necessary for accessibility.", $element);
+								console.warn("Invalid `open-event` specified for signingRolesDialog. This is necessary for accessibility.", $element);
 							}
-							$scope.toSign = toSign;
 
-							$scope.close = () => $mdDialog.hide();
+							$ctrl.toSign = toSign;
+
+							$ctrl.titleString = ($ctrl.toSign.formDefinition.name === 'dmr' 
+								? $ctrl.toSign.forms.length > 1
+									? "Sign " + $ctrl.toSign.forms.length + " DMRs as..."
+									: "Sign DMR as..."
+								: $ctrl.toSign.forms.length > 1
+									? "Sign " + $ctrl.toSign.forms.length + " instances of <strong>" + $ctrl.toSign.formDefinition.displayName + "</strong> as..."
+									: "Sign 1 instance of <strong>" + $ctrl.toSign.formDefinition.displayName + "</strong> as...")
+
+							$ctrl.close = function () {
+							  $mdDialog.hide();
+							};
+							$ctrl.cancel = function () {
+							  $mdDialog.cancel();
+							};
+
+							$ctrl.$onInit = function () {
+								console.log('ok');
+							}
+
 						},
 					],
 					template: template,

@@ -1,0 +1,66 @@
+// NOTE: THIS FILE IS DUPLICATED FROM NFORM .. 
+// If we ever get common styles shared between these projects, let's make sure they get synced up!
+
+@mdDialog-small-width: 540px;
+@mdDialog-medium-width: 720px;
+@mdDialog-mediumLarge-width: 960px;
+@mdDialog-large-width: 1024px;
+
+@mdDialog-innerPaddingV: 28px;
+@mdDialog-innerPaddingH: 24px;
+
+@mdDialog-toolbars-PaddingV: 18px;
+
+md-dialog {
+  max-height: 90%;
+}
+
+// These are weird.. "width" classes should have more predictable effects
+.mdDialog--small {
+  min-width: @mdDialog-small-width;
+}
+.mdDialog--medium {
+  width: 100%;
+  max-width: @mdDialog-medium-width;
+}
+.mdDialog--large {
+  width: 100%;
+  max-width: @mdDialog-large-width;
+}
+
+.mdDialog--fullscreen {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  border-radius: 0;
+}
+
+.mdDialog--paymentIFrame {
+  max-width: @mdDialog-mediumLarge-width;
+  width: 90%;
+}
+
+.mdDialog-body--padded {
+  padding: @mdDialog-innerPaddingV @mdDialog-innerPaddingH;
+}
+.mdDialog-body-segment--padded {
+  padding-left: @mdDialog-innerPaddingH;
+  padding-right: @mdDialog-innerPaddingH;
+  margin-top: @mdDialog-innerPaddingV;
+  margin-bottom: @mdDialog-innerPaddingV;
+}
+
+md-dialog .mdDialog-actions {
+  padding: @mdDialog-toolbars-PaddingV @mdDialog-innerPaddingH;
+}
+
+md-dialog .mdDialog-actions {
+  > *:not(:last-child) {
+    margin-right: @mdDialog-innerPaddingH / 2;
+  }
+}
+
+md-dialog .mdDialog-headerItems {
+  padding: @mdDialog-toolbars-PaddingV @mdDialog-innerPaddingH;
+}

@@ -22,3 +22,13 @@ angular.module("app").config(["$stateProvider",
 
 	}
 ]);
+
+// For displaying preformatted html with inline styles
+angular.module("app").filter("unsafe", [
+	"$sce",
+	function ($sce) {
+		return function (val) {
+			return $sce.trustAsHtml(val);
+		};
+	},
+]);

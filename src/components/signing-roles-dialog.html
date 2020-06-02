@@ -1,6 +1,114 @@
-<md-dialog>
-  <div class="Dialog-header"></div>
-  <div class="Dialog-body Dialog-body--padded">
-    {{toSign | json}}
+<md-dialog class="mdDialog mdDialog--large">
+  <md-toolbar>
+    <div class="md-toolbar-tools mdDialog-headerItems">
+      <!-- <span
+        >Sign {{$ctrl.toSign.forms.length > 1 ? 'forms' : 'form'}} as...</span
+      > -->
+      <span
+         ng-bind-html="$ctrl.titleString | unsafe"></span
+      >
+      <span flex="fill"></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.cancel($event)">
+        <md-icon aria-label="Close dialog"
+          >${require('../imported/x.svg')}</md-icon
+        >
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div class="mdDialog-body">
+    <!-- <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <h2>{{$ctrl.toSign.formDefinition.displayName}}</h2>
+    </div> -->
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <p ng-if="$ctrl.toSign.formDefinition.name !== 'dmr'">Please select a role to sign for each instance of <strong>{{$ctrl.toSign.formDefinition.displayName}}.</strong></p>
+      <p ng-if="$ctrl.toSign.formDefinition.name === 'dmr'">Please select a role to sign for each DMR.</p>
+    </div>
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="2">
+              <div class="table-headerText--large">
+                Submissions
+              </div>
+            </th>
+            <th colspan="2">
+              <div class="table-headerText--large">
+                Sign as...
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              Submission Info
+            </th>
+            <th>
+              Invitation Notes
+            </th>
+            <th class="table-headerCell table-headerCell--signingRole">
+              <div class="table-headerCell--signingRole-content">
+                <div class="table-headerCell--signingRole-row">Role Name</div>
+                <input type="checkbox">
+              </div>
+            </th>
+            <th class="table-headerCell table-headerCell--signingRole">
+              <div class="table-headerCell--signingRole-content">
+                <div class="table-headerCell--signingRole-row">Role Name</div>
+                <input type="checkbox">
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="form in $ctrl.toSign.forms" class="no-hover" ng-class-odd="'odd'">
+            <td class="u-noWrap">
+              <div class="Dashboard-item-row">
+                <div class="Dashboard-item-contextTitle">
+                  {{form.displayData.siteName}}
+                </div>
+              </div>
+              <div
+                class="Dashboard-item-row"
+                ng-if="form.displayData.preparedOnDisplay"
+              >
+                <span
+                  >Prepared on
+                  <strong>{{form.displayData.preparedOnDisplay}}</strong> by
+                  <strong>{{form.displayData.preparedBy}}</strong></span
+                >
+              </div>
+              <div
+                class="Dashboard-item-row"
+                ng-if="form.displayData.dateRangeStr"
+              >
+                <strong ng-bind="form.displayData.dateRangeStr"></strong>
+              </div>
+              <div
+                class="Dashboard-item-row"
+                ng-if="form.displayData.submissionId"
+                style="font-family: monospace;"
+              >
+                <strong>{{form.displayData.submissionId}}</strong>
+              </div>
+              <!-- <div class="u-noWrap" style="font-family: monospace">{{form.displayData.submissionId}}</div> -->
+            </td>
+            <td class="table-cell--borderRight">
+              {{form.displayData.invitationNotes}}
+            </td>
+            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole">
+              <input type="checkbox"></td>
+            </td>
+            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole">
+              <input type="checkbox"></td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <pre>
+        {{$ctrl.toSign | json}}
+      </pre>
+    </div>
   </div>
 </md-dialog>

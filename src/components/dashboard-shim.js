@@ -62,7 +62,8 @@ function controller () {
 				submissionId,
 				preparedOnDisplay: dayjs(preparedDate).format("MM/DD/YYYY"),
 				preparedBy,
-				siteName: faker.company.companyName()
+				siteName: faker.company.companyName(),
+				invitationNotes: faker.lorem.paragraph(),
 			}
 		}
 	}

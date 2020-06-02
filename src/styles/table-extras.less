@@ -1,0 +1,27 @@
+.table-headerText--large {
+  font-size: 18px;
+}
+td, .td {
+  &.table-cell--borderRight.table-cell--borderRight {
+    border-right: 1px solid @thead-border-color;   
+  }
+}
+
+.checkbox-cell--signingRole {
+  min-width: 80px;
+  .table > tbody > tr > & {
+    border-right: 1px solid @thead-border-color;
+  }
+}
+
+.table-headerCell--signingRole-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.table-headerCell--signingRole-row {
+  &:not(:last-child) {
+    margin-bottom: .25em;
+  }
+}

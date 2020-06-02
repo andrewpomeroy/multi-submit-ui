@@ -24,6 +24,19 @@ function controller () {
 					return output;
 				}, [])
 			}
+		},
+		// relies on only one form type being selectable at once
+		selectedForm: {
+			get: function () {
+				return ($ctrl.selectedIds && $ctrl.selectedIds.length ? (
+					$ctrl.forms.find(function (formGroup) {
+						return formGroup.items.find(function (form) {
+							return form.id === $ctrl.selectedIds[0]
+						})
+					})
+				)
+				: null);
+			}
 		}
 	})
 
@@ -112,13 +125,16 @@ function controller () {
 
 	$ctrl.openSigningPrompt = function ($event) {
 		$ctrl.openSigningDialogEvent = $event;
-		$ctrl.formsToSign = $ctrl.allForms.filter(function (form) {
-			return $ctrl.selectedIds.find(function (id) { return id === form.id });
-		})
+		$ctrl.toSign = {
+			formDefinition: $ctrl.selectedForm,
+			forms: $ctrl.allForms.filter(function (form) {
+				return $ctrl.selectedIds.find(function (id) { return id === form.id });
+			})
+		}
 	}
 
 	$ctrl.onSigningDialogClose = function () {
-		$ctrl.formsToSign = [];
+		$ctrl.toSign = null;
 	}
 
 }

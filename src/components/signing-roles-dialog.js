@@ -4,8 +4,8 @@ import template from "./signing-roles-dialog.html";
 var signingRolesDialog = {
 	bindings: {
 		openEvent: "<",
-		forms: "<",
 		onClose: "<",
+		toSign: "<",
 	},
 	controller: signingRolesDialogCtrl
 };
@@ -14,11 +14,9 @@ signingRolesDialogCtrl.$inject = ["$mdDialog"]
 function signingRolesDialogCtrl($mdDialog) {
 	var $ctrl = this;
 
-	console.log($ctrl.forms);
-
 	$ctrl.$onChanges = function (changes) {
 		console.log(changes);
-		if (changes.forms && changes.forms.currentValue && changes.forms.currentValue.length) {
+		if (changes.toSign && changes.toSign.currentValue && changes.toSign.currentValue.forms && changes.toSign.currentValue.forms.length) {
 			// Initialize dialog
 
 			$mdDialog
@@ -29,22 +27,22 @@ function signingRolesDialogCtrl($mdDialog) {
 					controller: [
 						"$scope",
 						"$mdDialog",
-						"forms",
-						function reassignDialogCtrl($scope, $mdDialog, forms) {
+						"toSign",
+						function reassignDialogCtrl($scope, $mdDialog, toSign) {
 							if (!$ctrl.openEvent) {
 								console.warn("No `open-event` specified for modalSelectMenu. This is necessary for accessibility.", $element);
 							}
 							if ($ctrl.openEvent && !$ctrl.openEvent.target) {
 								console.warn("Invalid `open-event` specified for modalSelectMenu. This is necessary for accessibility.", $element);
 							}
-							$scope.forms = forms;
+							$scope.toSign = toSign;
 
 							$scope.close = () => $mdDialog.hide();
 						},
 					],
 					template: template,
 					locals: {
-						forms: $ctrl.forms
+						toSign: $ctrl.toSign
 					},
 					onRemoving: () => {
 						$ctrl.onClose();

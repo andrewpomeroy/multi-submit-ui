@@ -43,8 +43,43 @@ function signingRolesDialogCtrl($mdDialog) {
 
 							$ctrl.toSign = toSign;
 
-							// Assumes one form type per signing
-							$ctrl.roles = $ctrl.toSign.forms[0].roles;
+							$ctrl.roles = $ctrl.toSign.formDefinition.roles;
+
+							$ctrl.model = $ctrl.toSign.forms.map(function (form) {
+								return form.certifications.map(function (cert) {
+									return {
+										value: false,
+										certifiedDate: cert.certifiedDate,
+										certifierName: cert.certifierName,
+										isCertified: Boolean(cert.certifiedDate && cert.certifierName),
+										hoverText: (cert.certifiedDate && cert.certifierName
+											? "Signed by " + cert.certifierName + " on " + cert.certifiedDate
+											: "")
+									}
+								})
+							})
+
+							$ctrl.isColumnActionable = function (colIndex) {
+								return !$ctrl.model.every(function (row) {
+									return row[colIndex].isCertified
+								})
+							}
+
+							$ctrl.isColumnAllSelected = function (colIndex) {
+								if (!$ctrl.isColumnActionable(colIndex)) return false;
+								return $ctrl.model.every(function (row) {
+									return row[colIndex].value || row[colIndex].isCertified
+								})
+							}
+
+							$ctrl.selectColumn = function (colIndex) {
+								var val = !$ctrl.isColumnAllSelected(colIndex);
+								$ctrl.model.forEach(function (row) {
+									if (!row[colIndex].isCertified) {
+										row[colIndex].value = val;
+									}
+								})
+							}
 
 							$ctrl.titleString = ($ctrl.toSign.formDefinition.name === 'dmr' 
 								? $ctrl.toSign.forms.length > 1
@@ -68,7 +103,7 @@ function signingRolesDialogCtrl($mdDialog) {
 					],
 					template: template,
 					locals: {
-						toSign: $ctrl.toSign
+						toSign: $ctrl.toSign,
 					},
 					onRemoving: () => {
 						$ctrl.onClose();

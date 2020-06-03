@@ -16,9 +16,6 @@
     </div>
   </md-toolbar>
   <div class="mdDialog-body">
-    <!-- <div class="mdDialog-body-segment mdDialog-body-segment--padded">
-      <h2>{{$ctrl.toSign.formDefinition.displayName}}</h2>
-    </div> -->
     <div class="mdDialog-body-segment mdDialog-body-segment--padded">
       <p ng-if="$ctrl.toSign.formDefinition.name !== 'dmr'">Please select a role to sign for each instance of <strong>{{$ctrl.toSign.formDefinition.displayName}}.</strong></p>
       <p ng-if="$ctrl.toSign.formDefinition.name === 'dmr'">Please select a role to sign for each DMR.</p>
@@ -48,8 +45,9 @@
             <th class="table-headerCell table-headerCell--signingRole" ng-repeat="role in $ctrl.roles">
               <div class="table-headerCell--signingRole-content">
                 <div class="table-headerCell--signingRole-row">{{role.roleName}}</div>
-                <!-- <input type="checkbox" ng-model="$ctrl.model.isSelectAll(role.roleName)"> -->
-                <input type="checkbox">
+                <!-- <input type="checkbox" ng-checked="$ctrl.model.isSelectAll(role.roleName)"> -->
+                <!-- <input type="checkbox"> -->
+                <button class="btn btn-default" style="font-size: .85em;" ng-click="$ctrl.selectColumn($index)" ng-disabled="!$ctrl.isColumnActionable($index)">{{$ctrl.isColumnAllSelected($index) ? "Deselect All" : "Select All"}}</button>
               </div>
             </th>
           </tr>
@@ -90,14 +88,19 @@
             <td class="table-cell--borderRight">
               {{form.displayData.invitationNotes}}
             </td>
-            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole" ng-repeat="certification in form.certifications">
-              <input type="checkbox"></td>
+            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole" ng-repeat="certification in form.certifications" title="{{$ctrl.model[$parent.$index][$index].hoverText}}">
+              <input type="checkbox" ng-model="$ctrl.model[$parent.$index][$index].value" ng-disabled="$ctrl.model[$parent.$index][$index].isCertified"></td>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <h3>model</h3>
+      <pre>
+        {{$ctrl.model | json}}
+      </pre>
+      <h3>toSign</h3>
       <pre>
         {{$ctrl.toSign | json}}
       </pre>

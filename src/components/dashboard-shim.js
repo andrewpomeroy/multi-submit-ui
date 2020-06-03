@@ -29,14 +29,14 @@ function controller () {
 
 	function makeSignature () {
 		return {
-			certifiedBy: faker.name.findName(),
+			certifierName: faker.name.findName(),
 			certifiedDate: faker.date.recent()
 		}
 	}
 
 	function makeCertifications(roles) {
 		const certifications = roles.reduce((output, certification, index) => {
-			if (Math.round(Math.random() + .3)) {
+			if (Math.round(Math.random() - .4)) {
 				certification = {
 					...certification,
 					...makeSignature()
@@ -49,7 +49,6 @@ function controller () {
 
 	function makeFakeGenericForm({roles}) {
 		return {
-			roles,
 			certifications: makeCertifications(roles),
 			id: uuid(),
 		}

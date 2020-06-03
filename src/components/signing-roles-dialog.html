@@ -16,9 +16,6 @@
     </div>
   </md-toolbar>
   <div class="mdDialog-body mdDialog-body--scroll">
-    <!-- <div class="mdDialog-body-segment mdDialog-body-segment--padded">
-      <h2>{{$ctrl.toSign.formDefinition.displayName}}</h2>
-    </div> -->
     <div class="mdDialog-body-segment mdDialog-body-segment--padded">
       <p ng-if="$ctrl.toSign.formDefinition.name !== 'dmr'">Please select a role to sign for each instance of <strong>{{$ctrl.toSign.formDefinition.displayName}}.</strong></p>
       <p ng-if="$ctrl.toSign.formDefinition.name === 'dmr'">Please select a role to sign for each DMR.</p>
@@ -98,7 +95,7 @@
         </tbody>
       </table>
     </div>
-    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+    <!-- <div class="mdDialog-body-segment mdDialog-body-segment--padded">
       <h3>outputModel</h3>
       <pre>
         {{$ctrl.outputModel | json}}
@@ -111,6 +108,16 @@
       <pre>
         {{$ctrl.toSign | json}}
       </pre>
+    </div> -->
+  </div>
+  <div class="Dashboard-actionBar">
+    <div class="Dashboard-action">
+      <button class="btn" ng-click="$ctrl.submit()" ng-disabled="!$ctrl.readyToSubmit" ng-class="{'green': $ctrl.readyToSubmit}">
+        Proceed to Signing
+      </button>
+      <button class="btn btn-default" ng-click="$ctrl.cancel()">
+        Cancel
+      </button>
     </div>
   </div>
 </md-dialog>

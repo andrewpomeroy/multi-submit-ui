@@ -15,14 +15,13 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 	var $ctrl = this;
 
 	$ctrl.$onChanges = function (changes) {
-		console.log(changes);
+		console.log($ctrl.openEvent);
 		if (changes.toSign && changes.toSign.currentValue && changes.toSign.currentValue.forms && changes.toSign.currentValue.forms.length) {
 			// Initialize dialog
 
 			$mdDialog
 				.show({
 					targetEvent: $ctrl.openEvent,
-					closeTo: $ctrl.openEvent ? $ctrl.openEvent.target : undefined,
 					clickOutsideToClose: true,
 					bindToController: true,
 					controllerAs: "$ctrl",
@@ -30,18 +29,22 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 						"$scope",
 						"$mdDialog",
 						"$element",
+						"openEvent",
 						"toSign",
-						function signingRolesDialogCtrlInner($scope, $mdDialog, $element, toSign) {
+						function signingRolesDialogCtrlInner($scope, $mdDialog, $element, openEvent, toSign) {
 							var $ctrl = this;
 
-							if (!$ctrl.openEvent) {
+							if (!openEvent) {
 								console.warn("No `open-event` specified for signingRolesDialog. This is necessary for accessibility.", $element);
 							}
-							if ($ctrl.openEvent && !$ctrl.openEvent.target) {
+							if (openEvent && !openEvent.target) {
 								console.warn("Invalid `open-event` specified for signingRolesDialog. This is necessary for accessibility.", $element);
 							}
 
 							$ctrl.toSign = toSign;
+
+							$ctrl.submissionNoun = $ctrl.toSign.formDefinition.name === 'dmr' ? 'DMR' : 'submission';
+							$ctrl.submissionNounPlural = $ctrl.toSign.formDefinition.name === 'dmr' ? 'DMRs' : 'submissions';
 
 							$ctrl.roles = $ctrl.toSign.formDefinition.roles;
 
@@ -76,14 +79,14 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 													return $ctrl.roles[col.index]
 												})
 											}
+										}).filter(function (row) {
+											return row.roles.length
 										})
 									}
 								},
 								readyToSubmit: {
 									get: function () {
-										return $ctrl.outputModel.every(function (submission) {
-											return submission.roles.length
-										})
+										return $ctrl.outputModel.length === $ctrl.toSign.forms.length
 									}
 								}
 							})
@@ -118,8 +121,10 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 									? "Sign " + $ctrl.toSign.forms.length + " instances of <strong>" + $ctrl.toSign.formDefinition.displayName + "</strong> as..."
 									: "Sign 1 instance of <strong>" + $ctrl.toSign.formDefinition.displayName + "</strong> as...")
 
-							$ctrl.close = function () {
-							  $mdDialog.hide();
+
+							$ctrl.submit = function () {
+								console.log("$ctrl.outputModel", $ctrl.outputModel);
+							  $mdDialog.hide($ctrl.outputModel);
 							};
 							$ctrl.cancel = function () {
 							  $mdDialog.cancel();
@@ -132,13 +137,16 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 					],
 					template: template,
 					locals: {
+						openEvent: $ctrl.openEvent,
 						toSign: $ctrl.toSign,
 					},
-					onRemoving: () => {
-						$ctrl.onClose();
+					onRemoving: function () {
+						$ctrl.openEvent.target.focus();
 					},
 				})
-				.finally(() => { });
+				.then(function (results) {
+					$ctrl.onClose(results);
+				});
 		}
 	}
 

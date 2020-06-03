@@ -133,7 +133,8 @@ function controller () {
 		}
 	}
 
-	$ctrl.onSigningDialogClose = function () {
+	$ctrl.onSigningDialogClose = function (results) {
+		console.log('Signing role selection results', results);
 		$ctrl.toSign = null;
 	}
 

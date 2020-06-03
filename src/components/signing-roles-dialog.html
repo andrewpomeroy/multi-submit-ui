@@ -32,7 +32,7 @@
                 Submissions
               </div>
             </th>
-            <th colspan="2">
+            <th colspan="{{$ctrl.roles.length}}">
               <div class="table-headerText--large">
                 Sign as...
               </div>
@@ -45,15 +45,10 @@
             <th>
               Invitation Notes
             </th>
-            <th class="table-headerCell table-headerCell--signingRole">
+            <th class="table-headerCell table-headerCell--signingRole" ng-repeat="role in $ctrl.roles">
               <div class="table-headerCell--signingRole-content">
-                <div class="table-headerCell--signingRole-row">Role Name</div>
-                <input type="checkbox">
-              </div>
-            </th>
-            <th class="table-headerCell table-headerCell--signingRole">
-              <div class="table-headerCell--signingRole-content">
-                <div class="table-headerCell--signingRole-row">Role Name</div>
+                <div class="table-headerCell--signingRole-row">{{role.roleName}}</div>
+                <!-- <input type="checkbox" ng-model="$ctrl.model.isSelectAll(role.roleName)"> -->
                 <input type="checkbox">
               </div>
             </th>
@@ -95,10 +90,7 @@
             <td class="table-cell--borderRight">
               {{form.displayData.invitationNotes}}
             </td>
-            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole">
-              <input type="checkbox"></td>
-            </td>
-            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole">
+            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole" ng-repeat="certification in form.certifications">
               <input type="checkbox"></td>
             </td>
           </tr>

@@ -34,7 +34,6 @@ function signingRolesDialogCtrl($mdDialog) {
 						function signingRolesDialogCtrlInner($scope, $mdDialog, $element, toSign) {
 							var $ctrl = this;
 
-							
 							if (!$ctrl.openEvent) {
 								console.warn("No `open-event` specified for signingRolesDialog. This is necessary for accessibility.", $element);
 							}
@@ -43,6 +42,9 @@ function signingRolesDialogCtrl($mdDialog) {
 							}
 
 							$ctrl.toSign = toSign;
+
+							// Assumes one form type per signing
+							$ctrl.roles = $ctrl.toSign.forms[0].roles;
 
 							$ctrl.titleString = ($ctrl.toSign.formDefinition.name === 'dmr' 
 								? $ctrl.toSign.forms.length > 1
@@ -60,7 +62,6 @@ function signingRolesDialogCtrl($mdDialog) {
 							};
 
 							$ctrl.$onInit = function () {
-								console.log('ok');
 							}
 
 						},

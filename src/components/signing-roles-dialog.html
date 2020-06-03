@@ -15,7 +15,10 @@
       </md-button>
     </div>
   </md-toolbar>
-  <div class="mdDialog-body">
+  <div class="mdDialog-body mdDialog-body--scroll">
+    <!-- <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <h2>{{$ctrl.toSign.formDefinition.displayName}}</h2>
+    </div> -->
     <div class="mdDialog-body-segment mdDialog-body-segment--padded">
       <p ng-if="$ctrl.toSign.formDefinition.name !== 'dmr'">Please select a role to sign for each instance of <strong>{{$ctrl.toSign.formDefinition.displayName}}.</strong></p>
       <p ng-if="$ctrl.toSign.formDefinition.name === 'dmr'">Please select a role to sign for each DMR.</p>

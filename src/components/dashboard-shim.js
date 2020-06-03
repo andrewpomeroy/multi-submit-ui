@@ -57,9 +57,8 @@ function controller () {
 		var submissionId = uuid();
 		var preparedDate = faker.date.recent();
 		var preparedBy = faker.name.findName();
-		return {
-			...makeFakeGenericForm({roles}),
-			submissionId,
+		var form = {
+			...makeFakeGenericForm({ roles }),
 			preparedDate,
 			preparedBy,
 			// displayFields: [
@@ -77,13 +76,14 @@ function controller () {
 			// 	},
 			// ]
 			displayData: {
-				submissionId,
 				preparedOnDisplay: dayjs(preparedDate).format("MM/DD/YYYY"),
 				preparedBy,
 				siteName: faker.company.companyName(),
 				invitationNotes: faker.lorem.paragraph(),
 			}
 		}
+		form.displayData.submissionId = form.id;
+		return form;
 	}
 
 	function makeFakeDmr({roles}) {

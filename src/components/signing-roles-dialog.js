@@ -10,8 +10,8 @@ var signingRolesDialog = {
 	controller: signingRolesDialogCtrl
 };
 
-signingRolesDialogCtrl.$inject = ["$mdDialog"]
-function signingRolesDialogCtrl($mdDialog) {
+signingRolesDialogCtrl.$inject = ["$mdDialog", "$filter"]
+function signingRolesDialogCtrl($mdDialog, $filter) {
 	var $ctrl = this;
 
 	$ctrl.$onChanges = function (changes) {
@@ -53,10 +53,39 @@ function signingRolesDialogCtrl($mdDialog) {
 										certifierName: cert.certifierName,
 										isCertified: Boolean(cert.certifiedDate && cert.certifierName),
 										hoverText: (cert.certifiedDate && cert.certifierName
-											? "Signed by " + cert.certifierName + " on " + cert.certifiedDate
+											? "Signed by " + cert.certifierName + " on " + $filter('date')(cert.certifiedDate, 'short')
 											: "")
 									}
 								})
+							})
+
+							Object.defineProperties($ctrl, {
+								outputModel: {
+									get: function () {
+										return $ctrl.model.map(function (row, rowIndex) {
+											return {
+												submissionVersionId: $ctrl.toSign.forms[rowIndex].id,
+												roles: row.map(function (col, colIndex) {
+													return ({
+														value: col.value,
+														index: colIndex
+													})
+												}).filter(function (col, colIndex) {
+													return col.value
+												}).map(function (col) {
+													return $ctrl.roles[col.index]
+												})
+											}
+										})
+									}
+								},
+								readyToSubmit: {
+									get: function () {
+										return $ctrl.outputModel.every(function (submission) {
+											return submission.roles.length
+										})
+									}
+								}
 							})
 
 							$ctrl.isColumnActionable = function (colIndex) {

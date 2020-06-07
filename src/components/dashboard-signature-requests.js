@@ -4,7 +4,8 @@ import template from "./dashboard-signature-requests.html";
 
 var component = {
 	bindings: {
-		forms: "<"
+		forms: "<",
+		certificationAgreements: "<",
 	},
 	template: template,
 	transclude: true,
@@ -36,6 +37,23 @@ function controller () {
 					})
 				)
 				: null);
+			}
+		},
+		signingDialogTitle: {
+			get: function () {
+				if (!$ctrl.selectedForm || !$ctrl.selectedIds) return null;
+				return ($ctrl.selectedForm.name === 'dmr'
+					? $ctrl.selectedIds.length > 1
+						? "Sign " + $ctrl.selectedIds.length + " DMRs"
+						: "Sign DMR"
+					: $ctrl.selectedIds.length > 1
+						? "Sign " + $ctrl.selectedIds.length + " instances of <strong>" + $ctrl.selectedForm.displayName + "</strong>"
+						: "Sign 1 instance of <strong>" + $ctrl.selectedForm.displayName + "</strong>")
+			}
+		},
+		roleSelectionDialogTitle: {
+			get: function () {
+				return $ctrl.signingDialogTitle + ' as...'
 			}
 		}
 	})
@@ -124,8 +142,8 @@ function controller () {
 	};
 
 	$ctrl.openSigningPrompt = function ($event) {
-		$ctrl.openSigningDialogEvent = $event;
-		$ctrl.toSign = {
+		$ctrl.openSigningRolesDialogEvent = $event;
+		$ctrl.selectedForRoleAssignment = {
 			formDefinition: $ctrl.selectedForm,
 			forms: $ctrl.allForms.filter(function (form) {
 				return $ctrl.selectedIds.find(function (id) { return id === form.id });
@@ -133,9 +151,19 @@ function controller () {
 		}
 	}
 
-	$ctrl.onSigningDialogClose = function (results) {
-		console.log('Signing role selection results', results);
-		$ctrl.toSign = null;
+	$ctrl.onsigningRolesDialogClose = function (results, $event) {
+		$ctrl.selectedForRoleAssignment = null;
+		$ctrl.selectedForSigning = results;
+		$ctrl.openFinalSigningDialogEvent = $event;
+	}
+
+	$ctrl.onFinalSigningCancel = function () {
+		$ctrl.selectedForSigning = null;
+	}
+
+	$ctrl.onFinalSigning = function () {
+		$ctrl.selectedForSigning = null;
+		alert('cool cool cool')
 	}
 
 }

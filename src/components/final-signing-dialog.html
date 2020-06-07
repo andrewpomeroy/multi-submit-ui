@@ -1,0 +1,81 @@
+<md-dialog class="mdDialog mdDialog--medium">
+  <md-toolbar>
+    <div class="md-toolbar-tools mdDialog-headerItems">
+      <span ng-bind-html="$ctrl.title | unsafe"></span>
+      <span flex="fill"></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.cancel($event)">
+        <md-icon aria-label="Close dialog"
+          >${require('../imported/x.svg')}</md-icon
+        >
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div class="mdDialog-body mdDialog-body--scroll">
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <p class="AppForm-text">
+        Please read the following signing statement carefully, and if you agree
+        to the terms, you may proceed with signing the document.
+      </p>
+    </div>
+    <div
+      class="mdDialog-body-segment mdDialog-body-segment--padded"
+      ng-repeat="role in $ctrl.roles"
+    >
+      <h3>
+        Certification Statement &mdash; <strong>{{role.roleName}}</strong>
+      </h3>
+      <div
+        class="Signing-certificationText"
+        ng-bind="role.certificationStatement"
+      ></div>
+    </div>
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <div class="form-group">
+        <div class="checkbox-list">
+          <div
+            class="checkbox-wrap"
+            ng-repeat="agreement in $ctrl.certificationAgreements"
+          >
+            <label>
+              <input type="checkbox" ng-model="$ctrl.checkboxModel[$index]" />
+              <span ng-bind="agreement"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <div class="form-group">
+        <div class="control-label">
+          Enter your password
+        </div>
+        <input type="password" class="form-control" ng-model="$ctrl.password" />
+      </div>
+      <div class="form-group">
+        <div class="control-label">
+          What was your favorite high school teacher's name?
+        </div>
+        <input
+          type="password"
+          class="form-control"
+          ng-model="$ctrl.securityQuestionAnswer"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="Dashboard-actionBar">
+    <div class="Dashboard-action">
+      <button
+        class="btn"
+        ng-click="$ctrl.submit()"
+        ng-disabled="!$ctrl.readyToSubmit"
+        ng-class="{'green': $ctrl.readyToSubmit}"
+      >
+        Sign
+      </button>
+      <button class="btn btn-default" ng-click="$ctrl.cancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</md-dialog>

@@ -48,7 +48,16 @@
   </div>
 </div>
 <signing-roles-dialog
-  to-sign="$ctrl.toSign"
-  open-event="$ctrl.openSigningDialogEvent"
-  on-close="$ctrl.onSigningDialogClose"
+  to-sign="$ctrl.selectedForRoleAssignment"
+  open-event="$ctrl.openSigningRolesDialogEvent"
+  on-close="$ctrl.onsigningRolesDialogClose"
+  title="$ctrl.roleSelectionDialogTitle"
 ></signing-roles-dialog>
+<final-signing-dialog
+  to-sign="$ctrl.selectedForSigning"
+  open-event="$ctrl.openFinalSigningDialogEvent"
+  on-close="$ctrl.onFinalSigning"
+  on-cancel="$ctrl.onFinalSigningCancel"
+  title="$ctrl.signingDialogTitle"
+  certification-agreements="$ctrl.certificationAgreements"
+></final-signing-dialog>

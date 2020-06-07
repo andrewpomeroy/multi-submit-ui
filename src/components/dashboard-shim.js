@@ -22,6 +22,7 @@ function controller () {
 		return {
 			roleName: faker.name.jobTitle(),
 			id: uuid(),
+			certificationStatement: faker.lorem.paragraphs(2)
 		}
 	}
 
@@ -128,6 +129,13 @@ function controller () {
 			displayName: "DMRs",
 			formFactory: makeFakeDmr
 		})
+	]
+
+	$ctrl.certificationAgreements = [
+		"I am the owner of the account used to perform the electronic submission and signature.",
+		"I have the authority to submit the data on behalf of the facility I am representing.",
+		"I agree that providing the account credentials to sign the submission document constitutes an electronic signature equivalent to my written signature.",
+		"I have reviewed the electronic form being submitted in its entirety, and agree to the validity and accuracy of the information contained within it to the best of my knowledge.",
 	]
 
 }

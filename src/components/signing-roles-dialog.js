@@ -6,6 +6,7 @@ var signingRolesDialog = {
 		openEvent: "<",
 		onClose: "<",
 		toSign: "<",
+		title: "<"
 	},
 	controller: signingRolesDialogCtrl
 };
@@ -15,7 +16,6 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 	var $ctrl = this;
 
 	$ctrl.$onChanges = function (changes) {
-		console.log($ctrl.openEvent);
 		if (changes.toSign && changes.toSign.currentValue && changes.toSign.currentValue.forms && changes.toSign.currentValue.forms.length) {
 			// Initialize dialog
 
@@ -31,7 +31,8 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 						"$element",
 						"openEvent",
 						"toSign",
-						function signingRolesDialogCtrlInner($scope, $mdDialog, $element, openEvent, toSign) {
+						"title",
+						function signingRolesDialogCtrlInner($scope, $mdDialog, $element, openEvent, toSign, title) {
 							var $ctrl = this;
 
 							if (!openEvent) {
@@ -42,6 +43,7 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 							}
 
 							$ctrl.toSign = toSign;
+							$ctrl.title = title;
 
 							$ctrl.submissionNoun = $ctrl.toSign.formDefinition.name === 'dmr' ? 'DMR' : 'submission';
 							$ctrl.submissionNounPlural = $ctrl.toSign.formDefinition.name === 'dmr' ? 'DMRs' : 'submissions';
@@ -123,7 +125,6 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 
 
 							$ctrl.submit = function () {
-								console.log("$ctrl.outputModel", $ctrl.outputModel);
 							  $mdDialog.hide($ctrl.outputModel);
 							};
 							$ctrl.cancel = function () {
@@ -139,6 +140,7 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 					locals: {
 						openEvent: $ctrl.openEvent,
 						toSign: $ctrl.toSign,
+						title: $ctrl.title
 					},
 					onRemoving: function () {
 						$ctrl.openEvent.target.focus();
@@ -152,6 +154,4 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 
 }
 
-console.log(signingRolesDialog);
-
-console.log(angular.module("app").component('signingRolesDialog', signingRolesDialog))
+angular.module("app").component('signingRolesDialog', signingRolesDialog);

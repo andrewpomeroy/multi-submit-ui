@@ -10,4 +10,5 @@ import "./components/dashboard-collapse-list-contents";
 import "./components/dashboard-card-list";
 import "./components/dashboard-card-list-item";
 import "./components/signing-roles-dialog";
+import "./components/final-signing-dialog";
 

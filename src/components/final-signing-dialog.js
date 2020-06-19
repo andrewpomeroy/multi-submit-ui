@@ -24,7 +24,6 @@ function finalSigningDialogCtrl($mdDialog, $filter) {
 			$mdDialog
 				.show({
 					targetEvent: $ctrl.openEvent,
-					clickOutsideToClose: true,
 					bindToController: true,
 					controllerAs: "$ctrl",
 					controller: [
@@ -65,7 +64,7 @@ function finalSigningDialogCtrl($mdDialog, $filter) {
 									get: function () {
 										return ($ctrl.checkboxModel.every(function (checkbox) {
 											return checkbox === true
-										}) && $ctrl.password.length && $ctrl.securityQuestionAnswer.length)
+										}) && $ctrl.password && $ctrl.password.length && $ctrl.securityQuestionAnswer && $ctrl.securityQuestionAnswer.length)
 									}
 								}
 							})
@@ -75,7 +74,7 @@ function finalSigningDialogCtrl($mdDialog, $filter) {
 							})
 
 							$ctrl.submit = function () {
-							  $mdDialog.hide();
+								$mdDialog.hide($ctrl.toSign, $ctrl.openEvent);
 							};
 							$ctrl.cancel = function () {
 							  $mdDialog.cancel();
@@ -95,7 +94,7 @@ function finalSigningDialogCtrl($mdDialog, $filter) {
 					},
 				})
 				.then(function (results) {
-					$ctrl.onClose(results);
+					$ctrl.onClose(results, $ctrl.openEvent);
 				})
 				.catch(function (error) {
 					if (error) {

@@ -3,7 +3,7 @@
   ng-class="{'JoinedCard--first': $ctrl.isFirst, 'JoinedCard--last': $ctrl.isLast, 'JoinedCard--selected': $ctrl.isSelected}"
 >
   <div class="Slab-splitH" flex="fill">
-    <div class="Slab-split-item">
+    <div class="Slab-split-item" ng-if="$ctrl.selectContext">
       <input
         type="checkbox"
         class="JoinedCard-checkbox JoinedCard-element"

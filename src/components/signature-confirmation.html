@@ -1,0 +1,34 @@
+<md-dialog class="mdDialog mdDialog--medium">
+  <md-toolbar>
+    <div class="md-toolbar-tools mdDialog-headerItems">
+      <span
+        >{{$ctrl.signed.length > 1 ? "Signatures" : "Signature"}} Received</span
+      >
+      <span flex="fill"></span>
+      <md-button class="md-icon-button" ng-click="$ctrl.cancel($event)">
+        <md-icon aria-label="Close dialog"
+          >${require('../imported/x.svg')}</md-icon
+        >
+      </md-button>
+    </div>
+  </md-toolbar>
+  <div class="mdDialog-body mdDialog-body--scroll">
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <p class="AppForm-text">
+        Your signature on the following forms has been received:
+      </p>
+    </div>
+    <div class="mdDialog-body-segment mdDialog-body-segment--padded">
+      <dashboard-card-list list="$ctrl.signed">
+        <!-- <dashboard-card-list-item></dashboard-card-list-item> -->
+      </dashboard-card-list>
+    </div>
+  </div>
+  <div class="Dashboard-actionBar">
+    <div class="Dashboard-action">
+      <button class="btn btn-default" ng-click="$ctrl.cancel()">
+        Close
+      </button>
+    </div>
+  </div>
+</md-dialog>

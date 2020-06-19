@@ -22,7 +22,9 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 			$mdDialog
 				.show({
 					targetEvent: $ctrl.openEvent,
-					clickOutsideToClose: true,
+					// openFrom: {
+					// },
+					// closeTo: {},
 					bindToController: true,
 					controllerAs: "$ctrl",
 					controller: [
@@ -147,7 +149,7 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 					},
 				})
 				.then(function (results) {
-					$ctrl.onClose(results);
+					$ctrl.onClose(results, $ctrl.openEvent);
 				});
 		}
 	}

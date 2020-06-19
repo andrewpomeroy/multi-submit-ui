@@ -11,4 +11,5 @@ import "./components/dashboard-card-list";
 import "./components/dashboard-card-list-item";
 import "./components/signing-roles-dialog";
 import "./components/final-signing-dialog";
+import "./components/signature-confirmation";
 

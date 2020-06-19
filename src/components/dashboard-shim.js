@@ -8,14 +8,14 @@ var component = {
 	bindings: {
 	},
 	template: template,
-	// transclude: true
 	controller: controller
 };
 
 function controller () {
 	var $ctrl = this;
 
-	var range = () => [...Array(Math.floor(Math.random() * 3 + 2)).keys()];
+	// var range = () => [...(Array(Math.floor(Math.random() * 3 + 2)).keys())];
+	const range = () => Array.from(new Array(Math.floor(Math.random() * 3 + 2)), (x, i) => i);
 
 	function makeRole() {
 
@@ -55,27 +55,12 @@ function controller () {
 		}
 	}
 	function makeFakeForm({roles}) {
-		var submissionId = uuid();
 		var preparedDate = faker.date.recent();
 		var preparedBy = faker.name.findName();
 		var form = {
 			...makeFakeGenericForm({ roles }),
 			preparedDate,
 			preparedBy,
-			// displayFields: [
-			// 	{
-			// 		label: "Submission ID",
-			// 		value: submissionId
-			// 	},
-			// 	{
-			// 		label: "Prepared On",
-			// 		value: dayjs(preparedDate).format("MM/DD/YYYY")
-			// 	},
-			// 	{
-			// 		label: "Prepared By",
-			// 		value: preparedBy
-			// 	},
-			// ]
 			displayData: {
 				preparedOnDisplay: dayjs(preparedDate).format("MM/DD/YYYY"),
 				preparedBy,
@@ -98,12 +83,6 @@ function controller () {
 				siteName: faker.company.companyName(),
 				dateRangeStr: dayjs(startDate).format("MM/DD/YYYY") + " — " + dayjs(endDate).format("MM/DD/YYYY"),
 			}
-			// displayFields: [
-			// 	{
-			// 		label: siteName,
-			// 		value: dayjs(startDate).format("MM/DD/YYYY") + " — " + dayjs(endDate).format("MM/DD/YYYY"),
-			// 	}
-			// ],
 		};
 	}
 

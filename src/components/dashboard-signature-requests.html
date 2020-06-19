@@ -51,6 +51,7 @@
   to-sign="$ctrl.selectedForRoleAssignment"
   open-event="$ctrl.openSigningRolesDialogEvent"
   on-close="$ctrl.onsigningRolesDialogClose"
+  on-cancel="$ctrl.onFinalSigningCancel"
   title="$ctrl.roleSelectionDialogTitle"
 ></signing-roles-dialog>
 <final-signing-dialog
@@ -61,3 +62,9 @@
   title="$ctrl.signingDialogTitle"
   certification-agreements="$ctrl.certificationAgreements"
 ></final-signing-dialog>
+<signature-confirmation
+  signed="$ctrl.signed"
+  open-event="$ctrl.openSignatureConfirmationDialogEvent"
+  on-close="$ctrl.onConfirmationClose"
+  on-cancel="$ctrl.onConfirmationClose"
+></signature-confirmation>

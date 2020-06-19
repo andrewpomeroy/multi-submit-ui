@@ -1,3 +1,6 @@
+<!-- <md-dialog class="mdDialog mdDialog--fullscreenScroll mdDialog--large">
+  <div class="mdDialog--fullscreenScroll-container">
+    <div class="mdDialog--fullscreenScroll-content"> -->
 <md-dialog class="mdDialog mdDialog--large">
   <md-toolbar>
     <div class="md-toolbar-tools mdDialog-headerItems">
@@ -5,7 +8,7 @@
         >Sign {{$ctrl.toSign.forms.length > 1 ? 'forms' : 'form'}} as...</span
       > -->
       <span
-         ng-bind-html="$ctrl.title | unsafe"></span
+        ng-bind-html="$ctrl.title | unsafe"></span
       >
       <span flex="fill"></span>
       <md-button class="md-icon-button" ng-click="$ctrl.cancel($event)">
@@ -15,6 +18,7 @@
       </md-button>
     </div>
   </md-toolbar>
+  <!-- <div class="mdDialog-body"> -->
   <div class="mdDialog-body mdDialog-body--scroll">
     <div class="mdDialog-body-segment mdDialog-body-segment--padded">
       <p ng-if="$ctrl.toSign.formDefinition.name !== 'dmr'">Please select a role to sign for each instance of <strong>{{$ctrl.toSign.formDefinition.displayName}}.</strong></p>
@@ -95,20 +99,7 @@
         </tbody>
       </table>
     </div>
-    <!-- <div class="mdDialog-body-segment mdDialog-body-segment--padded">
-      <h3>outputModel</h3>
-      <pre>
-        {{$ctrl.outputModel | json}}
-      </pre>
-      <h3>model</h3>
-      <pre>
-        {{$ctrl.model | json}}
-      </pre>
-      <h3>toSign</h3>
-      <pre>
-        {{$ctrl.toSign | json}}
-      </pre>
-    </div> -->
+
   </div>
   <div class="Dashboard-actionBar">
     <div class="Dashboard-action">

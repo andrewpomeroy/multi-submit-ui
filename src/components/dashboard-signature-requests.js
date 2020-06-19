@@ -161,9 +161,24 @@ function controller () {
 		$ctrl.selectedForSigning = null;
 	}
 
-	$ctrl.onFinalSigning = function () {
+	$ctrl.onFinalSigning = function (signed, $event) {
+		$ctrl.openSignatureConfirmationDialogEvent = $event;
 		$ctrl.selectedForSigning = null;
-		alert('cool cool cool')
+		$ctrl.signed = signed.map(function (signedForm) {
+			// var outputForm = {
+			// 	submissionVersionId: form.submissionVersionId,
+			// 	roles: form.roles
+			// };
+			var outputForm = $ctrl.allForms.find(function (submission) {
+				return submission.id === signedForm.submissionVersionId;
+			})
+			outputForm.roles = signedForm.roles;
+			return outputForm;
+		})
+	}
+
+	$ctrl.onConfirmationClose = function () {
+		$ctrl.openSignatureConfirmationDialogEvent = null;
 	}
 
 }

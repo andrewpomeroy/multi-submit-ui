@@ -10,6 +10,8 @@
 }
 
 .Dashboard-actionBar {
+  display: flex;
+  align-items: center;
   flex: 0 0 auto;
   padding: @Dashboard-marginV-small @Dashboard-marginH-base;   
   background: @form-actions-bg;
@@ -30,4 +32,8 @@
   & + & {
     display: none;
   }
+}
+
+.Dashboard-action:not(:last-child) {
+  margin-right: 1rem;
 }

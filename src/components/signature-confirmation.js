@@ -35,9 +35,52 @@ function signatureConfirmationCtrl($scope, $mdDialog, $window) {
 
 					$ctrl.signed = signed;
 
+					// MOCK -- please replace
+					$ctrl.signed.forEach(function (submission) {
+						submission.amountDue = Math.floor(Math.random() * 100);
+					})
+
 					$ctrl.cancel = $mdDialog.cancel;
 
-					console.log(signed);
+					$ctrl.selectedIds = [];
+					
+					$ctrl.isSelected = function (item) {
+						return Boolean($ctrl.selectedIds.find(function (id) {
+							return id === item.id;
+						}));	
+					}
+
+					function _toggleItem(array, value) {
+						var index = array.findIndex(function (item) {
+							return item === value;
+						});
+						if (index !== -1) {
+							array.splice(index, 1);
+						}
+						else {
+							array.push(value);
+						}
+					}
+
+					$ctrl.toggleItem = function (item, bool) {
+						_toggleItem($ctrl.selectedIds, item.id);
+					};
+
+					Object.defineProperties($ctrl, {
+						totalAmountSelected: {
+							get: function () {
+								return $ctrl.selectedIds.reduce(function(amount, id) {
+									var submission = $ctrl.signed.find(function (submission) {
+										return submission.id === id;
+									})
+									amount += submission.amountDue;
+									return amount;
+								}, 0)
+							}
+						}
+					})
+
+					
 
 				}],
 				bindToController: true,

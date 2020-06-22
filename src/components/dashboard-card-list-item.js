@@ -7,7 +7,8 @@ var component = {
 		isFirst: "<",
 		isLast: "<",
 		selectContext: "<",
-		isSelectable: "<"
+		isSelectable: "<",
+		showSelectBox: "<"
 	},
 	require: {
 		dashboardCardList: "?^"
@@ -17,7 +18,8 @@ var component = {
 	controller: controller
 };
 
-function controller () {
+controller.$inject = ['$attrs']
+function controller ($attrs) {
 	var $ctrl = this;
 
 	Object.defineProperties($ctrl, {
@@ -30,6 +32,12 @@ function controller () {
 			}
 		}
 	});
+
+	$ctrl.$onInit = function () {
+		if ($attrs.showSelectBox === undefined) {
+			$ctrl.showSelectBox = true;
+		}
+	}
 	
 }
 

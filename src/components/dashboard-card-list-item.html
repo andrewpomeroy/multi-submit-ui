@@ -9,6 +9,7 @@
         class="JoinedCard-checkbox JoinedCard-element"
         ng-disabled="!$ctrl.isSelectable"
         ng-model="$ctrl.isSelected"
+        ng-class="{'invisible': !$ctrl.showSelectBox}"
       />
     </div>
     <div class="Slab-split-item Slab-split-item--fill">

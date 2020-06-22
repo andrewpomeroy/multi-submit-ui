@@ -18,6 +18,7 @@ md-dialog {
 // These are weird.. "width" classes should have more predictable effects
 .mdDialog--small {
   min-width: @mdDialog-small-width;
+  max-width: @mdDialog-small-width;
 }
 .mdDialog--medium {
   width: 100%;
@@ -28,7 +29,7 @@ md-dialog {
   max-width: @mdDialog-large-width;
 }
 
-.mdDialog--fullscreen {
+.mdDialog--fullscreen, .mdDialog--fullscreenScroll {
   width: 100%;
   max-width: none;
   height: 100%;
@@ -67,4 +68,49 @@ md-dialog .mdDialog-actions {
 
 md-dialog .mdDialog-headerItems {
   padding: @mdDialog-toolbars-PaddingV @mdDialog-innerPaddingH;
+}
+
+// --------
+
+.mdDialog--fullscreenScroll {
+  overflow: visible;
+  background: none;
+  // pointer-events: none;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  max-width: none;
+}
+
+.mdDialog--fullscreenScroll-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 5em 3em;
+  overflow-y: auto;
+  width: 100%;
+  align-items: flex-start;
+  /* position: absolute; */
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+  position: relative;
+}
+
+
+.mdDialog--fullscreenScroll-content {
+  background: white;
+  overflow: hidden;
+  /* position: absolute; */
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+}
+
+.mdDialog--small .mdDialog--fullscreenScroll-content {
+min-width: @mdDialog-small-width;
+}
+.mdDialog--medium .mdDialog--fullscreenScroll-content {
+max-width: @mdDialog-medium-width;
+}
+.mdDialog--large .mdDialog--fullscreenScroll-content {
+max-width: @mdDialog-large-width;
 }

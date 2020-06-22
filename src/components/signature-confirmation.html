@@ -33,14 +33,14 @@
     </div>
   </div>
   <div class="Dashboard-actionBar">
+    <div class="Dashboard-action" ng-if="$ctrl.selectedIds.length">
+      <button class="btn btn-new" ng-click="$ctrl.cancel()">
+        Pay {{$ctrl.totalAmountSelected | currency}}
+      </button>
+    </div>
     <div class="Dashboard-action">
       <button class="btn btn-default" ng-click="$ctrl.cancel()">
         Close
-      </button>
-    </div>
-    <div class="Dashboard-action" ng-if="$ctrl.selectedIds.length">
-      <button class="btn btn-save" ng-click="$ctrl.cancel()">
-        Pay {{$ctrl.totalAmountSelected | currency}}
       </button>
     </div>
   </div>

@@ -37,6 +37,10 @@ function controller () {
 
 	function makeCertifications(roles) {
 		const certifications = roles.reduce((output, certification, index) => {
+			if (Math.round(Math.random() - .8)) {
+				// small chance we'll just leave a particular role out of this submission
+				return [...output]
+			}
 			if (Math.round(Math.random() - .4)) {
 				certification = {
 					...certification,

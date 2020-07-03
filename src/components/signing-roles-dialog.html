@@ -92,8 +92,9 @@
             <td class="table-cell--borderRight">
               {{form.displayData.invitationNotes}}
             </td>
-            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole" ng-repeat="certification in form.certifications" title="{{$ctrl.model[$parent.$index][$index].hoverText}}">
-              <input type="checkbox" ng-model="$ctrl.model[$parent.$index][$index].value" ng-disabled="$ctrl.model[$parent.$index][$index].isCertified"></td>
+            <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole" ng-repeat="role in $ctrl.roles" title="{{$ctrl.model[$parent.$index][$index].hoverText}}">
+            <!-- <td class="checkbox-cell checkbox-cell--centered checkbox-cell--signingRole" ng-repeat="certification in form.certifications" title="{{$ctrl.model[$parent.$index][$index].hoverText}}"> -->
+              <input type="checkbox" ng-model="$ctrl.model[$parent.$index][$index].value" ng-disabled="$ctrl.model[$parent.$index][$index].isCertified" ng-show="$ctrl.model[$parent.$index][$index].value != null"></td>
             </td>
           </tr>
         </tbody>
@@ -101,6 +102,7 @@
     </div>
 
   </div>
+
   <div class="Dashboard-actionBar">
     <div class="Dashboard-action">
       <button class="btn" ng-click="$ctrl.submit()" ng-disabled="!$ctrl.readyToSubmit" ng-class="{'green': $ctrl.readyToSubmit}">

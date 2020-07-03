@@ -53,15 +53,26 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 							$ctrl.roles = $ctrl.toSign.formDefinition.roles;
 
 							$ctrl.model = $ctrl.toSign.forms.map(function (form) {
-								return form.certifications.map(function (cert) {
-									return {
-										value: false,
-										certifiedDate: cert.certifiedDate,
-										certifierName: cert.certifierName,
-										isCertified: Boolean(cert.certifiedDate && cert.certifierName),
-										hoverText: (cert.certifiedDate && cert.certifierName
-											? "Signed by " + cert.certifierName + " on " + $filter('date')(cert.certifiedDate, 'short')
-											: "")
+								return $ctrl.roles.map(function (role) {
+									var formCert = form.certifications.find(function (cert) {
+										return cert.id === role.id
+									})
+									if (formCert) {
+										return {
+											value: false,
+											certifiedDate: formCert.certifiedDate,
+											certifierName: formCert.certifierName,
+											isCertified: Boolean(formCert.certifiedDate && formCert.certifierName),
+											hoverText: (formCert.certifiedDate && formCert.certifierName
+												? "Signed by " + formCert.certifierName + " on " + $filter('date')(formCert.certifiedDate, 'short')
+												: "")
+										}
+									}
+									// The role in this column doesn't apply to this form
+									else {
+										return {
+											value: null
+										}
 									}
 								})
 							})
@@ -97,21 +108,21 @@ function signingRolesDialogCtrl($mdDialog, $filter) {
 
 							$ctrl.isColumnActionable = function (colIndex) {
 								return !$ctrl.model.every(function (row) {
-									return row[colIndex].isCertified
+									return row[colIndex].isCertified || row[colIndex].value == null
 								})
 							}
 
 							$ctrl.isColumnAllSelected = function (colIndex) {
 								if (!$ctrl.isColumnActionable(colIndex)) return false;
 								return $ctrl.model.every(function (row) {
-									return row[colIndex].value || row[colIndex].isCertified
+									return row[colIndex].value || row[colIndex].isCertified || row[colIndex].value == null
 								})
 							}
 
 							$ctrl.selectColumn = function (colIndex) {
 								var val = !$ctrl.isColumnAllSelected(colIndex);
 								$ctrl.model.forEach(function (row) {
-									if (!row[colIndex].isCertified) {
+									if (!row[colIndex].isCertified && row[colIndex].value != null) {
 										row[colIndex].value = val;
 									}
 								})
